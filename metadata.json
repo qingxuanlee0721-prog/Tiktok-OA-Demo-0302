@@ -1,0 +1,5 @@
+{
+  "name": "Avatar Duet Camera",
+  "description": "A TikTok-native camera prototype with an Avatar Duet mode.",
+  "requestFramePermissions": ["camera", "microphone"]
+}
