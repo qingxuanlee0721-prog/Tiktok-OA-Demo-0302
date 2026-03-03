@@ -6,3 +6,28 @@
 html, body {
   font-family: var(--font-sans);
 }
+
+/* Avatar talking animation */
+@keyframes avatar-talking {
+  0%, 100% { transform: scale(1.0); }
+  25%       { transform: scale(1.015); }
+  75%       { transform: scale(1.012); }
+}
+
+/* Avatar blink animation */
+@keyframes avatar-blink {
+  0%, 89%, 100% { opacity: 1; }
+  90%, 95%      { opacity: 0.3; }
+}
+
+.avatar-talking {
+  animation: avatar-talking 0.4s ease-in-out infinite;
+}
+
+.avatar-blink {
+  animation: avatar-blink 0.2s ease-in-out;
+}
+
+/* Hide scrollbar for gallery strip */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

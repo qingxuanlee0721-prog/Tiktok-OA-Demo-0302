@@ -3,7 +3,7 @@ import { ArrowLeft, X } from "lucide-react";
 
 interface AvatarSelectionSheetProps {
   onClose: () => void;
-  onSelect: (avatarUrl: string) => void;
+  onSelect: (avatarId: string, avatarUrl: string) => void;
 }
 
 const AVATARS = [
@@ -51,7 +51,7 @@ export function AvatarSelectionSheet({
             key={avatar.id}
             src={avatar.imageUrl}
             name={avatar.name}
-            onClick={() => onSelect(avatar.imageUrl)}
+            onClick={() => onSelect(avatar.id, avatar.imageUrl)}
           />
         ))}
       </div>

@@ -9,6 +9,7 @@ import { AvatarSelectionSheet } from "./components/AvatarSelectionSheet";
 import { SplitScreenLayout } from "./components/SplitScreenLayout";
 import { GenerationOverlay } from "./components/GenerationOverlay";
 import { DraftPreviewScreen } from "./components/DraftPreviewScreen";
+import type { DuetResult } from "./types/chat";
 
 type AppState =
   | "DEFAULT_CAMERA"
@@ -19,7 +20,11 @@ type AppState =
 
 export default function App() {
   const [appState, setAppState] = useState<AppState>("DEFAULT_CAMERA");
-  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+  const [selectedAvatarId, setSelectedAvatarId] = useState<string | null>(null);
+  const [selectedAvatarUrl, setSelectedAvatarUrl] = useState<string | null>(null);
+  const [recordedVideoBlob, setRecordedVideoBlob] = useState<Blob | null>(null);
+  const [recordedAudioBlob, setRecordedAudioBlob] = useState<Blob | null>(null);
+  const [duetResult, setDuetResult] = useState<DuetResult | null>(null);
 
   return (
     <div className="w-full h-screen bg-black text-white overflow-hidden relative flex justify-center items-center font-sans">
@@ -33,8 +38,9 @@ export default function App() {
             <CameraScreen onOpenAvatar={() => {}} />
             <AvatarSelectionSheet
               onClose={() => setAppState("DEFAULT_CAMERA")}
-              onSelect={(avatar) => {
-                setSelectedAvatar(avatar);
+              onSelect={(avatarId, avatarUrl) => {
+                setSelectedAvatarId(avatarId);
+                setSelectedAvatarUrl(avatarUrl);
                 setAppState("SPLIT_SCREEN");
               }}
             />
@@ -42,21 +48,33 @@ export default function App() {
         )}
         {appState === "SPLIT_SCREEN" && (
           <SplitScreenLayout
-            avatar={selectedAvatar}
-            onRecordComplete={() => setAppState("GENERATING")}
+            avatarId={selectedAvatarId}
+            avatarUrl={selectedAvatarUrl}
+            onRecordComplete={(videoBlob, audioBlob) => {
+              setRecordedVideoBlob(videoBlob);
+              setRecordedAudioBlob(audioBlob);
+              setAppState("GENERATING");
+            }}
             onClose={() => setAppState("DEFAULT_CAMERA")}
           />
         )}
         {appState === "GENERATING" && (
           <GenerationOverlay
-            avatar={selectedAvatar}
+            avatarId={selectedAvatarId}
+            avatarUrl={selectedAvatarUrl}
+            audioBlob={recordedAudioBlob}
+            videoBlob={recordedVideoBlob}
             onDraftContinue={() => setAppState("DEFAULT_CAMERA")}
-            onComplete={() => setAppState("DRAFT_PREVIEW")}
+            onComplete={(result) => {
+              setDuetResult(result);
+              setAppState("DRAFT_PREVIEW");
+            }}
           />
         )}
         {appState === "DRAFT_PREVIEW" && (
           <DraftPreviewScreen
-            avatar={selectedAvatar}
+            avatarUrl={selectedAvatarUrl}
+            duetResult={duetResult}
             onDiscard={() => setAppState("DEFAULT_CAMERA")}
           />
         )}
