@@ -24,6 +24,16 @@ html, body {
   animation: avatar-talking 0.4s ease-in-out infinite;
 }
 
+/* Avatar breathing / listening animation (slow, calm) */
+@keyframes avatar-breathing {
+  0%, 100% { transform: scale(1.0); }
+  50%       { transform: scale(1.006); }
+}
+
+.avatar-breathing {
+  animation: avatar-breathing 3s ease-in-out infinite;
+}
+
 .avatar-blink {
   animation: avatar-blink 0.2s ease-in-out;
 }

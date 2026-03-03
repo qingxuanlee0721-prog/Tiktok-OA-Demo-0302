@@ -41,8 +41,8 @@ export function GenerationOverlay({
         onComplete({
           transcript: response.transcript,
           responseText: response.responseText,
+          replyVideoUrl: response.replyVideoUrl,
           audioBase64: response.audioBase64,
-          wordTimestamps: response.wordTimestamps,
           videoBlobUrl,
         });
       } catch (err: any) {
@@ -111,7 +111,7 @@ export function GenerationOverlay({
             onClick={() => { cancelledRef.current = true; onDraftContinue(); }}
             className="w-full bg-white text-black font-semibold py-3.5 rounded-full"
           >
-            Cancel
+            Continue generating in drafts
           </button>
         </div>
       </div>

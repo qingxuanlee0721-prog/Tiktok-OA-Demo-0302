@@ -18,9 +18,9 @@ const AVATARS = [
     imageUrl: "/avatars/billie-avatar.png",
   },
   {
-    id: "gojo",
-    name: "Gojo Satoru",
-    imageUrl: "/avatars/gojo-avatar.png",
+    id: "kairo",
+    name: "Kairo (Virtual)",
+    imageUrl: "/avatars/kairo-avatar.png",
   },
 ];
 

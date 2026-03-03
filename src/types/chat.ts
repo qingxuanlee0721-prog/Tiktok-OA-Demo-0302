@@ -1,22 +1,16 @@
-export type AvatarId = "wednesday" | "billie" | "gojo";
-
-export interface WordTimestamp {
-  word: string;
-  start: number;
-  end: number;
-}
+export type AvatarId = "wednesday" | "billie" | "kairo";
 
 export interface ChatResponse {
   transcript: string;
   responseText: string;
-  audioBase64: string;
-  wordTimestamps?: WordTimestamp[];
+  replyVideoUrl?: string;  // D-ID mode (kairo)
+  audioBase64?: string;    // CSS animation mode (wednesday, billie)
 }
 
 export interface DuetResult {
   transcript: string;
   responseText: string;
-  audioBase64: string;
-  wordTimestamps?: WordTimestamp[];
-  videoBlobUrl: string;
+  replyVideoUrl?: string;
+  audioBase64?: string;
+  videoBlobUrl: string; // user's recorded video
 }

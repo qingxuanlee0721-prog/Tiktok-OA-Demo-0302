@@ -33,7 +33,7 @@ export function SplitScreenLayout({
   let hookText = "Do something. They will notice!";
   if (avatarId === "wednesday") hookText = "Do something. Wednesday will notice!";
   else if (avatarId === "billie") hookText = "Be real. Billie will react!";
-  else if (avatarId === "gojo") hookText = "Try it. Gojo responds!";
+  else if (avatarId === "kairo") hookText = "Say something. Kairo will notice!";
 
   // Set up camera on mount
   useEffect(() => {
