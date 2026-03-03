@@ -73,6 +73,7 @@ export default function App() {
         )}
         {appState === "DRAFT_PREVIEW" && (
           <DraftPreviewScreen
+            avatarId={selectedAvatarId}
             avatarUrl={selectedAvatarUrl}
             duetResult={duetResult}
             onDiscard={() => setAppState("DEFAULT_CAMERA")}
