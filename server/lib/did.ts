@@ -52,7 +52,7 @@ async function uploadImageToDid(avatarId: AvatarId): Promise<string> {
 // Upload TTS audio buffer to D-ID, returns a URL D-ID can use internally
 export async function uploadAudioToDid(audioBuffer: Buffer): Promise<string> {
   const formData = new FormData();
-  const audioFile = new File([audioBuffer], "reply.mp3", { type: "audio/mpeg" });
+  const audioFile = new File([new Uint8Array(audioBuffer)], "reply.mp3", { type: "audio/mpeg" });
   formData.append("audio", audioFile);
 
   const res = await fetch(`${DID_API_URL}/audios`, {
@@ -82,10 +82,6 @@ export async function createDidTalk(imageUrl: string, audioUrl: string): Promise
     script: {
       type: "audio",
       audio_url: audioUrl,
-    },
-    config: {
-      fluent: false,
-      pad_audio: 0,
     },
   };
   console.log("D-ID talk request body:", JSON.stringify(body));
